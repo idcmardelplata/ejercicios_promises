@@ -1,24 +1,24 @@
-import { readFile } from "fs";
+/*
+ * Pending.
+ * fullfiled
+ * rejected
+ */
 
-const log = data => {
-  console.log(data);
-  return data;
-}
+const promise = new Promise(
+  (resolve) => {
+    setTimeout(() => {
+      resolve("Primer resultado");
+    }, 4000)
+  });
 
+promise.then((resultado) => {
+  console.log(resultado);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(resultado + " procesado");
+    }, 500)
+  });
+})
+  .then(console.log)
+  .catch(console.error);
 
-function read(path) {
-  return new Promise(
-    (resolve, reject) => {
-
-      readFile(path, (error, result) => {
-        if (error) reject(error);
-        resolve(result);
-      })
-    })
-};
-
-
-read("./01-promises.js")
-  .then(data => data.toString())
-  .then(log)
-  .catch(error => console.error("Paso un error " + error))
