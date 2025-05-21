@@ -10,7 +10,18 @@ const read = (path) => {
   })
 }
 
-read("./02-async-await.js")
-  .then(data => data.toString())
-  .then(data => data.toUpperCase())
-  .then(console.log);
+
+const result = await read("./02-async-await.js")
+
+async function out(lapse) {
+  setTimeout(() => {
+    console.log("tIEMPO dado");
+  }, lapse)
+};
+
+
+Promise.all([read("./01-promises.js")]).then(data => data.toString()).then(console.log)
+
+
+
+
